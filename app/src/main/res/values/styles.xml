@@ -17,4 +17,39 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+    <!-- Style for School item in Schools list-->
+    <style name="school">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:padding">20dp</item>
+
+    </style>
+
+
+    <!-- style for labels in item_profile-->
+    <style name="labels_profile_style">
+        <item name="android:textSize">@dimen/labelstextsizeforprofile</item>
+        <item name="android:background">@drawable/labelrectangularshape</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">@dimen/itempadding</item>
+    </style>
+    <!--style for the item attributes in item profile-->
+    <style name="item_attributes">
+        <item name="android:textSize">@dimen/itemattributetextsize</item>
+        <item name="android:background">@drawable/rectangularshape</item>
+        <item name="android:padding">@dimen/itempadding</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    <!-- sytle for grid_view_item-->
+    <style name="grid_view_item">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:background">@drawable/roundedborder</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:padding">20dp</item>
+
+    </style>
+
 </resources>

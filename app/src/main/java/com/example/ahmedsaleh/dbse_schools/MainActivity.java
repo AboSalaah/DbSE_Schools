@@ -1,8 +1,10 @@
 package com.example.ahmedsaleh.dbse_schools;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +14,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private StringBuilder Url=new StringBuilder();
+    private String result;
+    private Grid_View_Adapter gridViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,23 +44,45 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        GridView gridView=(GridView)findViewById(R.id.grid_view);
+        ArrayList<Grid_View_Item> arr=new ArrayList<>();
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+        arr.add(new Grid_View_Item("Ahmed","1"));
+
+         gridViewAdapter=new Grid_View_Adapter(this,arr);
+        gridView.setAdapter(gridViewAdapter);
+       gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               Grid_View_Item Governorate =(Grid_View_Item) parent.getItemAtPosition(position);
+               Intent intent=new Intent(MainActivity.this,Schools.class);
+               intent.putExtra("name",Governorate.getmName());
+               startActivity(intent);
+
+           }
+       });
+
+      Url.append(getString(R.string.url)+"schoollocation"+"?token="+getString(R.string.token));
+        connect();
+
     }
 
     @Override
@@ -98,4 +141,63 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    void connect()
+    {
+        OkHttpClient okHttpClient=new OkHttpClient();
+        okhttp3.Request request=new okhttp3.Request.Builder()
+                .url(Url.toString())
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
+                        Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                result=response.body().string().toString();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            Log.i("tag","el resulttttt  "+result);
+                            ArrayList<Grid_View_Item>data=new ArrayList<Grid_View_Item>();
+                            JSONArray jsonArray=new JSONArray(result);
+                            for(int i=0;i<jsonArray.length();++i)
+                            {
+                                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                                if(jsonObject.has("city")&&!jsonObject.getString("city").equals("null"))
+                                {
+
+                                            String name=jsonObject.getString("city");
+                                            data.add(new Grid_View_Item(name,"1"));
+
+
+
+                                }
+                            }
+                            gridViewAdapter.notifyDataSetChanged();
+                           gridViewAdapter.setAdapter(getApplicationContext(),data);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+
+
+            }
+        });
+
+    }
+
+
+
+
 }

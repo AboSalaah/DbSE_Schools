@@ -6,4 +6,12 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- represent the width and height of image in school list-->
+    <dimen name="image_school_list">90dp</dimen>
+
+    <dimen name="labelstextsizeforprofile">30dp</dimen>
+    <dimen name="itemattributetextsize">20dp</dimen>
+    <dimen name="itempadding">10dp</dimen>
+    <dimen name="logoforprofile">50dp</dimen>
 </resources>

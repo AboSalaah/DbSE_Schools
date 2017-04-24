@@ -10,6 +10,7 @@
     android:id="@+id/schools_list_view"
     tools:context="com.example.ahmedsaleh.dbse_schools.Schools"
     android:background="@color/background_color"
+    android:dividerHeight="@dimen/spacing_shcools_list_view"
     >
 
 </ListView>

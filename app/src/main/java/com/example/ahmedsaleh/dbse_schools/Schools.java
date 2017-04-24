@@ -66,7 +66,7 @@ public class Schools extends AppCompatActivity {
             }
         });
         Url.append(getString(R.string.url)+"schoollocation/"+govname+"?token="+getString(R.string.token));
-        connect();
+        //connect();
     }
 
     /**

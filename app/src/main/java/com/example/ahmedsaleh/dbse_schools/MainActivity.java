@@ -2,8 +2,6 @@ package com.example.ahmedsaleh.dbse_schools;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity
 
     private StringBuilder Url=new StringBuilder();
     private String result;
-    private Grid_View_Adapter gridViewAdapter;
+    private Governorates_Adapter governoratesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,33 +54,32 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        GridView gridView=(GridView)findViewById(R.id.grid_view);
-        ArrayList<Grid_View_Item> arr=new ArrayList<>();
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
-        arr.add(new Grid_View_Item("Ahmed","1"));
+        ListView listView=(ListView)findViewById(R.id.list_view);
+        ArrayList<String> arr=new ArrayList<>();
+        arr.add("Ahmed");
+        arr.add("Ahmed");
+        arr.add("Ahmed");
+        arr.add("Ahmed");
+        arr.add("Ahmed");
+        arr.add("Ahmed");
+        arr.add("Ahmed");
+        arr.add("Ahmed");
 
-         gridViewAdapter=new Grid_View_Adapter(this,arr);
-        gridView.setAdapter(gridViewAdapter);
-       gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        governoratesAdapter=new Governorates_Adapter(this,arr);
+        listView.setAdapter(governoratesAdapter);
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               Grid_View_Item Governorate =(Grid_View_Item) parent.getItemAtPosition(position);
+              String Governorate =(String) parent.getItemAtPosition(position);
                Intent intent=new Intent(MainActivity.this,Schools.class);
-               intent.putExtra("name",Governorate.getmName());
+               intent.putExtra("name",Governorate);
                startActivity(intent);
 
            }
        });
 
       Url.append(getString(R.string.url)+"schoollocation"+"?token="+getString(R.string.token));
-        connect();
+        //connect();
 
     }
 
@@ -166,7 +164,7 @@ public class MainActivity extends AppCompatActivity
                         try {
 
                             Log.i("tag","el resulttttt  "+result);
-                            ArrayList<Grid_View_Item>data=new ArrayList<Grid_View_Item>();
+                            ArrayList<String>data=new ArrayList<String>();
                             JSONArray jsonArray=new JSONArray(result);
                             for(int i=0;i<jsonArray.length();++i)
                             {
@@ -175,14 +173,15 @@ public class MainActivity extends AppCompatActivity
                                 {
 
                                             String name=jsonObject.getString("city");
-                                            data.add(new Grid_View_Item(name,"1"));
+                                            data.add(name);
 
 
 
                                 }
                             }
-                            gridViewAdapter.notifyDataSetChanged();
-                           gridViewAdapter.setAdapter(getApplicationContext(),data);
+                            governoratesAdapter.clear();
+                            governoratesAdapter.addAll(data);
+                            governoratesAdapter.notifyDataSetChanged();
 
                         } catch (JSONException e) {
                             e.printStackTrace();

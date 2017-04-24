@@ -14,14 +14,12 @@
     android:background="@color/background_color"
     >
 
-    <GridView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="auto_fit"
-        android:id="@+id/grid_view"
-        android:verticalSpacing="20dp"
-        android:stretchMode="spacingWidthUniform"
-        android:columnWidth="150dp"
+        android:id="@+id/list_view"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="@dimen/spacing_list_view"
         />
 
 

@@ -14,4 +14,8 @@
     <dimen name="itemattributetextsize">20dp</dimen>
     <dimen name="itempadding">10dp</dimen>
     <dimen name="logoforprofile">50dp</dimen>
+    <!-- spacing between items in governorate list view-->
+    <dimen name="spacing_list_view">20.0sp</dimen>
+    <!-- spacing between items in schools list view-->
+    <dimen name="spacing_shcools_list_view">7.0sp</dimen>
 </resources>

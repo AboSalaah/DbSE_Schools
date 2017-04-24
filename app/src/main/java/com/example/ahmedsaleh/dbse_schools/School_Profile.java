@@ -26,14 +26,27 @@ import okhttp3.Response;
 public class School_Profile extends AppCompatActivity {
     StringBuilder Url=new StringBuilder();
     String result;
+    private double lat; //represent latitude for location on map
+    private double lon;//represent longitude for loctaion on map
+    private String location; //represent the city for location on map
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school__profile);
         final Intent intent=getIntent();
         String schoolid=intent.getStringExtra("id");
+        TextView locationonmaplabel=(TextView)findViewById(R.id.school_profile_location_on_map_label);
+        TextView locationonmap=(TextView)findViewById(R.id.school_profile_location_on_map);
+        locationonmaplabel.setText(R.string.locationonmap);
+        locationonmap.setText(R.string.your_string_here);
+        locationonmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QueryUtils.showLocationOnMap(getApplicationContext(),lat,lon,location);
+            }
+        });
        Url.append(getString(R.string.url)+"school/"+schoolid+"?token="+getString(R.string.token));
-        connect();
+        //connect();
 
     }
 
@@ -87,6 +100,7 @@ public class School_Profile extends AppCompatActivity {
                             {
                                 schoollocationlable.setText(getString(R.string.locatoin));
                                 schoollocation.setText(jsonObject1.getString("location"));
+                                location=jsonObject1.getString("location");
                             }
                             else
                             {
@@ -154,6 +168,43 @@ public class School_Profile extends AppCompatActivity {
                             {
                                 schoolcontacts.setVisibility(View.GONE);
                                 schoolcontactslabel.setVisibility(View.GONE);
+                            }
+                            TextView schoolfeeslabel=(TextView)findViewById(R.id.school_profile_fees_label);
+                            TextView schoolfees=(TextView)findViewById(R.id.school_profile_fees);
+                            if(jsonObject1.has("fees")&&!jsonObject1.getString("fees").equals("null"))
+                            {
+                                schoolfeeslabel.setText(getString(R.string.fees));
+                                schoolfees.setText(jsonObject1.getString("fees"));
+                            }
+                            else
+                            {
+                                schoolfeeslabel.setVisibility(View.GONE);
+                                schoolfees.setVisibility(View.GONE);
+                            }
+
+                            TextView locationonmaplabel=(TextView)findViewById(R.id.school_profile_location_on_map_label);
+                            TextView locationonmap=(TextView)findViewById(R.id.school_profile_location_on_map);
+                            if(jsonObject1.has("x")&&!jsonObject1.getString("x").equals("null")&&jsonObject1.has("y")&&!jsonObject1.getString("y").equals("null"))
+                            {
+                                lat=jsonObject1.getDouble("x");
+                                lon=jsonObject1.getDouble("y");
+                            }
+                            else
+                            {
+                                locationonmaplabel.setVisibility(View.GONE);
+                                locationonmap.setVisibility(View.GONE);
+                            }
+                            TextView otherslable=(TextView)findViewById(R.id.school_profile_others_label);
+                            TextView others=(TextView)findViewById(R.id.school_profile_others);
+                            if(jsonObject1.has("others")&&jsonObject1.getString("others").equals("null"))
+                            {
+                                otherslable.setText(R.string.others);
+                                others.setText(jsonObject1.getString("others"));
+                            }
+                            else
+                            {
+                                others.setVisibility(View.GONE);
+                                otherslable.setVisibility(View.GONE);
                             }
 
 

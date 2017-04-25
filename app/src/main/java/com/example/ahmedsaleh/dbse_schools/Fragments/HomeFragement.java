@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.ahmedsaleh.dbse_schools.Activities.Schools;
+import com.example.ahmedsaleh.dbse_schools.Activities.SignIn;
 import com.example.ahmedsaleh.dbse_schools.Adapters.Governorates_Adapter;
 import com.example.ahmedsaleh.dbse_schools.R;
 
@@ -81,8 +82,8 @@ public class HomeFragement extends Fragment {
             }
         });
 
-        Url.append(getString(R.string.url)+"schoollocation"+"?token="+getString(R.string.token));
-        //connect();
+        Url.append(getString(R.string.url)+"schoollocation"+"?token="+ SignIn.token);
+        connect();
 
 
 

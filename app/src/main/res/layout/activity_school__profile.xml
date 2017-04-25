@@ -46,6 +46,21 @@
             />
 
     </LinearLayout>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/school_profile_city_label"
+           style="@style/labels_profile_style"
+           />
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/school_profile_city"
+           style="@style/item_attributes"
+           />
+
+
        <TextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -160,6 +175,9 @@
            android:id="@+id/school_profile_others"
            style="@style/item_attributes"
            />
+
+
+
 
 
    </LinearLayout>

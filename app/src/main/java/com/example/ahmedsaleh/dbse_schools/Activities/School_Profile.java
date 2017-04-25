@@ -3,6 +3,7 @@ package com.example.ahmedsaleh.dbse_schools.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ public class School_Profile extends AppCompatActivity {
     String result;
     private double lat; //represent latitude for location on map
     private double lon;//represent longitude for loctaion on map
-    private String location; //represent the city for location on map
+    private String location="Default"; //represent the city for location on map
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +45,8 @@ public class School_Profile extends AppCompatActivity {
                 QueryUtils.showLocationOnMap(getApplicationContext(),lat,lon,location);
             }
         });
-       Url.append(getString(R.string.url)+"school/"+schoolid+"?token="+getString(R.string.token));
-        //connect();
+       Url.append(getString(R.string.url)+"school/"+schoolid+"?token="+SignIn.token);
+        connect();
 
     }
 
@@ -70,6 +71,7 @@ public class School_Profile extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+                            Log.i("tag","resulttttt "+result);
                             JSONObject jsonObject=new JSONObject(result);
                             JSONObject jsonObject1=jsonObject.getJSONObject("school");
                             TextView schoolnamelabel=(TextView)findViewById(R.id.school_profile_name_label);
@@ -120,10 +122,10 @@ public class School_Profile extends AppCompatActivity {
                             }
                             TextView schoolwebsitelabel=(TextView)findViewById(R.id.school_profile_website_label);
                             TextView schoolwebsite=(TextView)findViewById(R.id.school_profile_website);
-                            if(jsonObject1.has("website")&&!jsonObject1.getString("website").equals("null"))
+                            if(jsonObject1.has("website_url")&&!jsonObject1.getString("website_url").equals("null"))
                             {
                                 schoolwebsitelabel.setText(getString(R.string.website));
-                                schoolwebsite.setText(jsonObject1.getString("website"));
+                                schoolwebsite.setText(jsonObject1.getString("website_url"));
                             }
                             else
                             {
@@ -154,6 +156,20 @@ public class School_Profile extends AppCompatActivity {
                             {
                                 schooldes.setVisibility(View.GONE);
                                 schooldeslable.setVisibility(View.GONE);
+                            }
+
+
+                            TextView citylable=(TextView)findViewById(R.id.school_profile_city_label);
+                            TextView city=(TextView)findViewById(R.id.school_profile_city);
+                            if(jsonObject1.has("city")&&!jsonObject1.getString("city").equals("null"))
+                            {
+                                citylable.setText(getString(R.string.city));
+                                city.setText(jsonObject1.getString("city"));
+                            }
+                            else
+                            {
+                                city.setVisibility(View.GONE);
+                                city.setVisibility(View.GONE);
                             }
 
                             TextView schoolclaslabel=(TextView)findViewById(R.id.school_profile_classification_label);

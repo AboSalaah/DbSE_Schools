@@ -192,6 +192,7 @@ public class SignUp extends AppCompatActivity {
             public void onResponse(okhttp3.Call call, final Response response) throws IOException {
                 result = response.body().string().toString();
                 Log.v("Response code", String.valueOf(response.code()));
+                Log.i("tag","resulltttttt "+result);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

@@ -64,8 +64,8 @@ public class Schools extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Url.append(getString(R.string.url)+"schoollocation/"+govname+"?token="+getString(R.string.token));
-        //connect();
+        Url.append(getString(R.string.url)+"schoollocation/"+govname+"?token="+SignIn.token);
+        connect();
     }
 
     /**

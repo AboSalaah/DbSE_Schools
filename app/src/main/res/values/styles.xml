@@ -42,13 +42,13 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
     <!-- sytle for governorate_list_view_item-->
-    <style name="grid_view_item">
+    <style name="list_view_item">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">80dp</item>
-        <item name="android:background">@drawable/roundedborder</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:padding">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/governoratelistpadding</item>
         <item name="android:layout_centerHorizontal">true</item>
 
     </style>

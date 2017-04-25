@@ -23,5 +23,8 @@
     <string name="your_string_here">
         <u>LocationOnMap</u>.
     </string>
+    <string name="listofschoolsactivityname">Schools</string>
+    <string name="listofgovernorates">Governorates</string>
+    <string name="schoolprofile">SchoolProfile</string>
     
 </resources>

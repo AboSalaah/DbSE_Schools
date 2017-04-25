@@ -11,11 +11,11 @@
     <dimen name="image_school_list">90dp</dimen>
 
     <dimen name="labelstextsizeforprofile">30dp</dimen>
-    <dimen name="itemattributetextsize">20dp</dimen>
+    <dimen name="itemattributetextsize">25dp</dimen>
     <dimen name="itempadding">10dp</dimen>
     <dimen name="logoforprofile">50dp</dimen>
-    <!-- spacing between items in governorate list view-->
-    <dimen name="spacing_list_view">20.0sp</dimen>
     <!-- spacing between items in schools list view-->
-    <dimen name="spacing_shcools_list_view">7.0sp</dimen>
+    <dimen name="spacing_list_view">7.0sp</dimen>
+    <!-- padding in text in governorate list-->
+    <dimen name="governoratelistpadding">30dp</dimen>
 </resources>

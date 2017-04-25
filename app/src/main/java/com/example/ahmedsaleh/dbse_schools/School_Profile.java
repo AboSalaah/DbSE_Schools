@@ -50,7 +50,7 @@ public class School_Profile extends AppCompatActivity {
 
     }
 
-    void connect()
+   private void connect()
     {
         OkHttpClient okHttpClient=new OkHttpClient();
         final okhttp3.Request request=new okhttp3.Request.Builder()

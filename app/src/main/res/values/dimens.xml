@@ -18,4 +18,10 @@
     <dimen name="spacing_list_view">7.0sp</dimen>
     <!-- padding in text in governorate list-->
     <dimen name="governoratelistpadding">30dp</dimen>
+    <dimen name="edittextwidthsignup">300dp</dimen>
+    <dimen name="edittexthieghtsignup">50dp</dimen>
+    <dimen name="labelstextsizeforprofile">30dp</dimen>
+    <dimen name="itemattributetextsize">20dp</dimen>
+
+
 </resources>

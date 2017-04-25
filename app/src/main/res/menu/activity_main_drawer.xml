@@ -2,34 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+        <item android:id="@+id/Home_icon"
+            android:icon="@drawable/home"
+            android:title="Home"/>
+        <item android:id="@+id/View_Profile"
+            android:icon="@drawable/icaccount"
+            android:title="View Profile" />
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/Edit_profile"
+            android:icon="@drawable/icedit"
+            android:title="Edit Profile" />
+        <item android:id="@+id/about_dbse"
+            android:icon="@drawable/ic_about"
+            android:title="About DbSE" />
+        <item android:id="@+id/Contacts"
+            android:icon="@drawable/ic_contacts"
+            android:title="Contacts" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Others">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+            <item android:id="@+id/Settings"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Settings" />
+            <item android:id="@+id/Sign_out"
+                android:icon="@drawable/ic_signout"
+                android:title="Sign Out" />
         </menu>
     </item>
 

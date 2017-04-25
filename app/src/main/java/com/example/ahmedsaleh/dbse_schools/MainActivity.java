@@ -1,8 +1,16 @@
 package com.example.ahmedsaleh.dbse_schools;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +20,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import static com.example.ahmedsaleh.dbse_schools.SignIn.openBbSE_FacebookPage;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +34,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,6 +43,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_main, new HomeFragement());
+        ft.commit();
     }
 
     @Override
@@ -70,8 +77,45 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id == R.id.action_logout){
+            movToSignInActivity();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void displaySelectedScreen(int id) {
+
+        Fragment fragment = null;
+        switch (id) {
+            case R.id.Home_icon:
+                fragment = new HomeFragement();
+                break;
+            case R.id.View_Profile:
+                fragment = new ViewProfileFragement();
+                break;
+            case R.id.Edit_profile:
+                fragment = new EditProfileFragement();
+                break;
+            case R.id.about_dbse:
+                fragment = new AboutDbseFragement();
+                break;
+            case R.id.Contacts:
+                fragment = new HomeFragement();
+                viewContactsDialog();
+                break;
+            case R.id.Sign_out:
+                movToSignInActivity();
+                break;
+        }
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_main, fragment);
+            ft.commit();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -80,22 +124,48 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        displaySelectedScreen(id);
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    void viewContactsDialog(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+        final View mview=getLayoutInflater().inflate(R.layout.contacts_dialog,null);
+        mBuilder.setTitle(R.string.contacts_text);
+        mBuilder.setView(mview);
+        mBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        AlertDialog dialog=mBuilder.create();
+        dialog.show();
+
+        ImageView facbookpage = (ImageView) mview.findViewById(R.id.Facebook_dialog);
+        facbookpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent facebookIntent = openBbSE_FacebookPage(MainActivity.this);
+                Intent chooser = Intent.createChooser(facebookIntent,"Open By");
+                startActivity(chooser);
+            }
+        });
+        TextView DbSE = (TextView) mview.findViewById(R.id.Dbse_dialog);
+        DbSE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent DbSE_Intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.dbse.co/schools"));
+                Intent chooser = Intent.createChooser(DbSE_Intent,"Open By");
+                startActivity(chooser);
+            }
+        });
+    }
+
+    private void movToSignInActivity() {
+        Intent i = new Intent(getApplicationContext(),SignIn.class);
+        startActivity(i);
+        finish();
     }
 }

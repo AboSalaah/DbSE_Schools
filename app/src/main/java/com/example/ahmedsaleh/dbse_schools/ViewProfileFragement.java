@@ -4,9 +4,21 @@ package com.example.ahmedsaleh.dbse_schools;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 /**
@@ -14,6 +26,9 @@ import android.view.ViewGroup;
  */
 public class ViewProfileFragement extends Fragment {
 
+    TextView firstLetter;
+    String result=null;
+    StringBuilder URL;
 
     public ViewProfileFragement() {
         // Required empty public constructor
@@ -33,4 +48,59 @@ public class ViewProfileFragement extends Fragment {
         getActivity().setTitle("My Profile");
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        firstLetter = (TextView) getActivity().findViewById(R.id.View_Profile_textincircle);
+        URL = new StringBuilder(getString(R.string.url)+"visitor/"+String.valueOf(SignIn.id)+"?token=");
+        URL.append(SignIn.token);
+        connect();
+
+    }
+
+
+    void connect()
+    {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(URL.toString())
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(okhttp3.Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(okhttp3.Call call, Response response) throws IOException
+            {
+                result=response.body().string().toString();
+                Log.v("Response code", String.valueOf(response.code()));
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        try {
+                            JSONObject json =new JSONObject(result);
+                            TextView name = (TextView) getActivity().findViewById(R.id.View_Profile_username_header);
+                            name.setText(json.getString("name"));
+                            TextView mail = (TextView) getActivity().findViewById(R.id.View_Profile_email_header);
+                            mail.setText(json.getString("email"));
+                            firstLetter.setText(String.valueOf(Character.toUpperCase(json.getString("name").charAt(0))));
+                            TextView username = (TextView) getActivity().findViewById(R.id.username_viewprofile2);
+                            username.setText(json.get("username").toString());
+                            TextView gender = (TextView) getActivity().findViewById(R.id.Gender_viewprofile2);
+                            gender.setText(json.get("gender").toString());
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+            }
+        });
+
+    }
 }

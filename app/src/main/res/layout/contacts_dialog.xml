@@ -16,7 +16,7 @@
         android:id="@+id/Dbse_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
+        android:text="@string/DbSE"
         android:clickable="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="25sp"

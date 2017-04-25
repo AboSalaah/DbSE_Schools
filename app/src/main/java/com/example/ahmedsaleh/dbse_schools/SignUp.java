@@ -79,7 +79,6 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(validateOtherData()){
-//                    Toast.makeText(SignUp.this, "Done", Toast.LENGTH_LONG).show();
                     URL = new StringBuilder(getString(R.string.url)+"signup");
                     params = new HashMap<String, String>();
                     params.put("username",username.getText().toString());
@@ -190,9 +189,7 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
-                Log.v("responsehhhhhhhhh", call.request().body().toString());
-                e.printStackTrace();
+
             }
 
             @Override
@@ -231,9 +228,7 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(SignUp.this, "Connection Failed", Toast.LENGTH_LONG).show();
-                Log.v("responsehhhhhhhhh", call.request().body().toString());
-                e.printStackTrace();
+
             }
 
             @Override
@@ -243,15 +238,12 @@ public class SignUp extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String mystr="";
                         try {
                             JSONObject json = new JSONObject(result);
                             String msg = json.get("msg").toString();
                             Toast.makeText(SignUp.this, msg, Toast.LENGTH_LONG).show();
                             moveToSignInActivity();
-                            mystr = json.get("error").toString();
                         } catch (JSONException e) {
-                            Toast.makeText(SignUp.this, mystr , Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 

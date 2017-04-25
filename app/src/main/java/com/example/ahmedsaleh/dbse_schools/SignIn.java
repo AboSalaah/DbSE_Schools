@@ -72,8 +72,8 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View view) {
                 URL = new StringBuilder(getString(R.string.url)+"signin");
                 if(validate()){
-//                    connect();
-                    moveToMainActivity();
+                    connect();
+//                    moveToMainActivity();
                 }
             }
         });
@@ -191,9 +191,7 @@ public class SignIn extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-//                Toast.makeText(SignIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
-                Log.v("responsehhhhhhhhh", call.request().body().toString());
-                e.printStackTrace();
+
             }
 
             @Override
@@ -217,7 +215,6 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
-//        Toast.makeText(SignIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
     }
 
     void connect()
@@ -236,9 +233,7 @@ public class SignIn extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-                Log.v("responsehhhhhhhhh", call.request().body().toString());
-                e.printStackTrace();
-//                Toast.makeText(SignIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
+
             }
 
             @Override
@@ -251,7 +246,7 @@ public class SignIn extends AppCompatActivity {
                         try {
                             JSONObject json = new JSONObject(result);
                             String error = json.get("error").toString();
-//                            Toast.makeText(SignIn.this,error, Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignIn.this,"Wrong User or Password", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             try {

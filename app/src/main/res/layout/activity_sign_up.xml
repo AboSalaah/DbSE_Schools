@@ -46,7 +46,7 @@
                 />
             <EditText
                 style="@style/edittext_sign_in_up_style"
-                android:hint="@string/signuppassword"
+                android:hint="password (at least 8 ch)"
                 android:inputType="textPassword"
                 android:id="@+id/passwordedittext" />
 
@@ -81,6 +81,7 @@
                 android:layout_marginLeft="32dp"
                 android:visibility="invisible"
                 android:clickable="false"
+                android:textColor="@color/white"
                 android:text="Male" />
             <CheckBox
                 android:id="@+id/female_checkbox"
@@ -89,6 +90,7 @@
                 android:layout_toRightOf="@+id/male_checkbox"
                 android:visibility="invisible"
                 android:clickable="false"
+                android:textColor = "@color/white"
                 android:text="Female"/>
             <Button
                 android:id="@+id/chooseGender"

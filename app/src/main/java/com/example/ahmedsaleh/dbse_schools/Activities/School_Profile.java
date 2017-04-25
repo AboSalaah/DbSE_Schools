@@ -1,4 +1,4 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ahmedsaleh.dbse_schools.Helpers.QueryUtils;
+import com.example.ahmedsaleh.dbse_schools.R;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Queue;
 
 import okhttp3.Call;
 import okhttp3.Callback;

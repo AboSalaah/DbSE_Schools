@@ -20,8 +20,7 @@
     <dimen name="governoratelistpadding">30dp</dimen>
     <dimen name="edittextwidthsignup">300dp</dimen>
     <dimen name="edittexthieghtsignup">50dp</dimen>
-    <dimen name="labelstextsizeforprofile">30dp</dimen>
-    <dimen name="itemattributetextsize">20dp</dimen>
+
 
 
 </resources>

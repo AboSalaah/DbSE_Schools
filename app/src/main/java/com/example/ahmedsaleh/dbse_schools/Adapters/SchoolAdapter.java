@@ -1,8 +1,6 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Adapters;
 
 import android.content.Context;
-import android.provider.ContactsContract;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.ahmedsaleh.dbse_schools.R;
+import com.example.ahmedsaleh.dbse_schools.Helpers.School;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class SchoolAdapter extends ArrayAdapter<School>{
     Context ctx;
 
     /**
-     * initalize the adapter
+     * Initalize the adapter
      * @param context Application Context
      * @param schools ArrayList of Schools
      */

@@ -1,4 +1,4 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Fragments;
 
 
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.ahmedsaleh.dbse_schools.Activities.SignIn;
+import com.example.ahmedsaleh.dbse_schools.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

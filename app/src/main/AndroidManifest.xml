@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/listofgovernorates"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".SignIn"
+        <activity android:name=".Activities.SignIn"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,14 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUp" />
-        <activity android:name=".Schools"
+        <activity android:name=".Activities.SignUp" />
+        <activity android:name=".Activities.Schools"
             android:label="@string/listofschoolsactivityname"
 
             >
 
         </activity>
-        <activity android:name=".School_Profile"
+        <activity android:name=".Activities.School_Profile"
             android:label="@string/schoolprofile"
 
             ></activity>

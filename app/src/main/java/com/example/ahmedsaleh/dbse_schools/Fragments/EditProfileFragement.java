@@ -1,7 +1,6 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +13,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ahmedsaleh.dbse_schools.Activities.SignIn;
+import com.example.ahmedsaleh.dbse_schools.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

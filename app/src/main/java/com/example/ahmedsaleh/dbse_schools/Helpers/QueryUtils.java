@@ -1,4 +1,4 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Helpers;
 
 import android.content.Context;
 import android.content.Intent;

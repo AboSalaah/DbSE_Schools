@@ -1,17 +1,12 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,32 +16,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.example.ahmedsaleh.dbse_schools.SignIn.openBbSE_FacebookPage;
+import com.example.ahmedsaleh.dbse_schools.Fragments.AboutDbseFragement;
+import com.example.ahmedsaleh.dbse_schools.Fragments.EditProfileFragement;
+import com.example.ahmedsaleh.dbse_schools.Fragments.HomeFragement;
+import com.example.ahmedsaleh.dbse_schools.R;
+import com.example.ahmedsaleh.dbse_schools.Fragments.ViewProfileFragement;
+
+import static com.example.ahmedsaleh.dbse_schools.Activities.SignIn.openBbSE_FacebookPage;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private StringBuilder Url=new StringBuilder();
-    private String result;
-    private Governorates_Adapter governoratesAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,32 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ft.replace(R.id.content_main, new HomeFragement());
         ft.commit();
 
-        ListView listView=(ListView)findViewById(R.id.list_view);
-        ArrayList<String> arr=new ArrayList<>();
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
 
-        governoratesAdapter=new Governorates_Adapter(this,arr);
-        listView.setAdapter(governoratesAdapter);
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              String Governorate =(String) parent.getItemAtPosition(position);
-               Intent intent=new Intent(MainActivity.this,Schools.class);
-               intent.putExtra("name",Governorate);
-               startActivity(intent);
-
-           }
-       });
-
-      Url.append(getString(R.string.url)+"schoollocation"+"?token="+getString(R.string.token));
-        //connect();
 
     }
 
@@ -219,61 +178,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         finish();
     }
 
-
-    void connect()
-    {
-        OkHttpClient okHttpClient=new OkHttpClient();
-        okhttp3.Request request=new okhttp3.Request.Builder()
-                .url(Url.toString())
-                .build();
-
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Toast.makeText(getApplicationContext(), getString(R.string.connectionproblem),
-                        Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                result=response.body().string().toString();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-
-                            Log.i("tag","el resulttttt  "+result);
-                            ArrayList<String>data=new ArrayList<String>();
-                            JSONArray jsonArray=new JSONArray(result);
-                            for(int i=0;i<jsonArray.length();++i)
-                            {
-                                JSONObject jsonObject=jsonArray.getJSONObject(i);
-                                if(jsonObject.has("city")&&!jsonObject.getString("city").equals("null"))
-                                {
-
-                                            String name=jsonObject.getString("city");
-                                            data.add(name);
-
-
-
-                                }
-                            }
-                            governoratesAdapter.clear();
-                            governoratesAdapter.addAll(data);
-                            governoratesAdapter.notifyDataSetChanged();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-
-
-            }
-        });
-
-    }
 
 
 

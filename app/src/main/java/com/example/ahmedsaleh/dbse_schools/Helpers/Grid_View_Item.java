@@ -1,4 +1,4 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Helpers;
 
 /**
  * Created by Ahmed Saleh on 4/23/2017.

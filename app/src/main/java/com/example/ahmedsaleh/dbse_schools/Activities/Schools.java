@@ -1,4 +1,4 @@
-package com.example.ahmedsaleh.dbse_schools;
+package com.example.ahmedsaleh.dbse_schools.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,22 +10,21 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
+import com.example.ahmedsaleh.dbse_schools.R;
+import com.example.ahmedsaleh.dbse_schools.Helpers.School;
+import com.example.ahmedsaleh.dbse_schools.Adapters.SchoolAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 public class Schools extends AppCompatActivity {
     private StringBuilder Url=new StringBuilder();

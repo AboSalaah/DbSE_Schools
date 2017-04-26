@@ -64,7 +64,6 @@ public class SignIn extends AppCompatActivity {
                 URL = new StringBuilder(getString(R.string.url)+"signin");
                 if(validate()){
                     connect();
-//                    moveToMainActivity();
                 }
             }
         });
@@ -182,7 +181,12 @@ public class SignIn extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SignIn.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -195,6 +199,7 @@ public class SignIn extends AppCompatActivity {
                         try {
                             JSONObject json = new JSONObject(result);
                             String msg = json.get("msg").toString();
+                            Log.v("message",msg);
                             Toast.makeText(SignIn.this,msg, Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             Toast.makeText(SignIn.this,"The selected email is invalid!", Toast.LENGTH_LONG).show();
@@ -224,7 +229,12 @@ public class SignIn extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SignIn.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -261,7 +271,6 @@ public class SignIn extends AppCompatActivity {
 
             }
         });
-//        Toast.makeText(SingIn.this,"Connection Failed", Toast.LENGTH_LONG).show();
     }
 
 

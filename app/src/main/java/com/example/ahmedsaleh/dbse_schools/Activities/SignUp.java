@@ -185,7 +185,12 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SignUp.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -203,6 +208,7 @@ public class SignUp extends AppCompatActivity {
                             verifyemail();
 
                         } catch (JSONException e) {
+                            Toast.makeText(SignUp.this,"sending to this email failed!", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 
@@ -225,7 +231,12 @@ public class SignUp extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SignUp.this,"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -240,7 +251,9 @@ public class SignUp extends AppCompatActivity {
                             String msg = json.get("msg").toString();
                             Toast.makeText(SignUp.this, msg, Toast.LENGTH_LONG).show();
                             moveToSignInActivity();
+                            finish();
                         } catch (JSONException e) {
+                            Toast.makeText(SignUp.this, "Registeration Failed!", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 

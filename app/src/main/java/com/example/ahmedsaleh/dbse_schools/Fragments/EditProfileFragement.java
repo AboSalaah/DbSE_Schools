@@ -112,7 +112,12 @@ public class EditProfileFragement extends Fragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -171,6 +176,13 @@ public class EditProfileFragement extends Fragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override

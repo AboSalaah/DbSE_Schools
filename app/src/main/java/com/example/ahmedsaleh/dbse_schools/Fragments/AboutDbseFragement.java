@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse_schools.R;
 
@@ -75,6 +76,12 @@ public class AboutDbseFragement extends Fragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override

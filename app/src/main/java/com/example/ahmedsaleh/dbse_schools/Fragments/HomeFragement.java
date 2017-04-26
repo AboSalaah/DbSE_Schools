@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ahmedsaleh.dbse_schools.Activities.Schools;
 import com.example.ahmedsaleh.dbse_schools.Activities.SignIn;
@@ -92,6 +93,13 @@ public class HomeFragement extends Fragment {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(),"Connection Failed!", Toast.LENGTH_LONG).show();
+                    }
+                });
 
             }
 

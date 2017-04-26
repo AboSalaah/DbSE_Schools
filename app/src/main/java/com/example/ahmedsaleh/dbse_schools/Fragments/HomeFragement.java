@@ -60,16 +60,8 @@ public class HomeFragement extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ListView listView=(ListView)getActivity().findViewById(R.id.list_view);
         ArrayList<String> arr=new ArrayList<>();
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
-        arr.add("Ahmed");
 
-        governoratesAdapter=new Governorates_Adapter(getContext(),arr);
+        governoratesAdapter=new Governorates_Adapter(getContext(),new ArrayList<String>());
         listView.setAdapter(governoratesAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

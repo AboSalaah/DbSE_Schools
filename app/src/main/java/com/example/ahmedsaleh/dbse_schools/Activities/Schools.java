@@ -39,21 +39,8 @@ public class Schools extends AppCompatActivity {
         final Intent intent=getIntent();
         String govname=intent.getStringExtra("name");
         ArrayList<School>arr=new ArrayList<>();
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-        arr.add(new School("elradwa","1"));
-       schoolAdapter=new SchoolAdapter(this,arr);
+
+       schoolAdapter=new SchoolAdapter(this,new ArrayList<School>());
         listView.setAdapter(schoolAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
